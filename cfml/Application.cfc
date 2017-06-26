@@ -10,7 +10,7 @@ component extends="taffy.core.api" {
 	function onApplicationStart() {
 		application.authtable = StructNew();
 		application.authtable["tonytony"] = StructNew();
-		application.authtable["tonytony"].password = "1234";
+		application.authtable["tonytony"].password = Hash("1234");
 		application.authtable["tonytony"].email = "tony@brandners.com";
 		application.authtable["tonytony"].current = 0;
 

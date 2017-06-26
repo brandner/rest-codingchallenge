@@ -26,7 +26,7 @@ component extends="taffy.core.resource" taffy_uri="/v1/register" {
     	var authMatches = StructFindValue(application.authtable, arguments.email);
     	if(NOT ArrayIsEmpty(authMatches)) {
     		// array is not empty - check the password
-    		if(authMatches[1].owner.password NEQ arguments.password) {
+    		if(authMatches[1].owner.password NEQ Hash(arguments.password)) {
     			return noData().withStatus(401, "Invalid password");
     		}
 
@@ -39,7 +39,7 @@ component extends="taffy.core.resource" taffy_uri="/v1/register" {
 
 		// add to auth table
 		application.authtable[key] = StructNew();
-		application.authtable[key].password = arguments.password;
+		application.authtable[key].password = Hash(arguments.password);
 		application.authtable[key].email = arguments.email;
 		application.authtable[key].current = 0;
 
