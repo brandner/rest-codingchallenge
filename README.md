@@ -61,7 +61,8 @@ For testing, returns the table of registered users and integer values.
 3. The regsitration data is stored in the "application" scope, and does not persist upon an application restart. It could be easily replaced with a different datastore.
 4. Passwords are hashed so as to not be stored in readable format.
 5. Web service calls return 401 errors if not authorized, via the onTaffyRequest() handler.
-6. Additional calls can be made to /v1/register with the same username and password to recall the API key
+6. Currently, 401 errors in the demo environment result in the server sending a "friendly server error". In some hosting environments this can be turned off - when off, the JSON API "error" structure is returned.
+6. Additional calls can be made to /v1/register with the same username and password to recall the API key.
 
 ## Links
 In general, these were the only web pages that were open during the coding for this challenge:
