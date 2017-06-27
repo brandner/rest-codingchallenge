@@ -9,7 +9,8 @@ component extends="taffy.core.resource" taffy_uri="/v1/admin" {
 
     	param name="application.authtable" default=StructNew();
 
-    	returnStruct["data"]["authtable"] = application.authtable;
+		returnStruct["data"]["authtable"] = application.authtable;
+
         return rep(returnStruct);
     }
 

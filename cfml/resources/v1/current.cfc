@@ -9,7 +9,10 @@ component extends="taffy.core.resource" taffy_uri="/v1/current" {
     	// get current value from the table
 		var current = application.authtable[arguments.key].current;
 
-    	returnStruct["data"] = current;
+    	returnStruct["data"]["type"] = "integers as a service";
+    	returnStruct["data"]["atributes"]["integer"] = current;
+    	returnStruct["links"]["self"] = "//" & CGI.SERVER_NAME & CGI.SCRIPT_NAME & "/v1/current";
+    	returnStruct["links"]["next"] = "//" & CGI.SERVER_NAME & CGI.SCRIPT_NAME & "/v1/next";
         return rep(returnStruct);
     }
 
@@ -22,7 +25,10 @@ component extends="taffy.core.resource" taffy_uri="/v1/current" {
     	// set current value in the table
     	application.authtable[arguments.key].current = arguments.current;
 
-    	returnStruct["data"] = arguments.current;
+		returnStruct["data"]["type"] = "integers as a service";
+    	returnStruct["data"]["atributes"]["integer"] = arguments.current;
+    	returnStruct["links"]["self"] = "//" & CGI.SERVER_NAME & CGI.SCRIPT_NAME & "/v1/current";
+    	returnStruct["links"]["next"] = "//" & CGI.SERVER_NAME & CGI.SCRIPT_NAME & "/v1/next";
         return rep(returnStruct);
     }
 

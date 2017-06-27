@@ -27,7 +27,17 @@ component extends="taffy.core.api" {
 
 		// no authorization bearer token
 		if(NOT StructKeyExists(arguments.headers, "authorization")) {
-			return noData().withStatus(401, "No key presented");
+
+			var returnStruct = StructNew();
+			returnStruct["error"] = StructNew();
+			returnStruct["error"]["errors"] = StructNew();
+			returnStruct["error"]["errors"]["status"] = "401 Not Authorized";
+			returnStruct["error"]["errors"]["code"] = "401";
+			returnStruct["error"]["errors"]["title"] = "Not Authorized";
+			returnStruct["error"]["code"] = "401";
+			returnStruct["error"]["message"] = "Authorization bearer token required";
+
+			return rep(returnStruct).withStatus(200, returnStruct["error"]["message"]);
 		}
 
 		// check auth here - first get the token
@@ -37,7 +47,17 @@ component extends="taffy.core.api" {
 
 		// see if we have that key registered
 		if(NOT StructKeyExists(application.authtable, key)) {
-			return noData().withStatus(401, "Key not found");
+
+			var returnStruct = StructNew();
+			returnStruct["error"] = StructNew();
+			returnStruct["error"]["errors"] = StructNew();
+			returnStruct["error"]["errors"]["status"] = "401 Not Authorized";
+			returnStruct["error"]["errors"]["code"] = "401";
+			returnStruct["error"]["errors"]["title"] = "Not Authorized";
+			returnStruct["error"]["code"] = "401";
+			returnStruct["error"]["message"] = "API Key not found";
+
+			return rep(returnStruct).withStatus(401, returnStruct["error"]["message"]);
 		}
 
 		arguments.reqArgs.key = key;
